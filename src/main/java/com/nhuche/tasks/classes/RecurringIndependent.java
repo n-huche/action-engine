@@ -8,20 +8,12 @@ import java.util.Optional;
 
 public class RecurringIndependent extends Task implements Lifecycle, Cadence {
 
-    private String goal;
-    private String action;
-    private Optional<String> doOn;
-    private Optional<String> doAt;
-    private Optional<String> doUntil;
     private Optional<String> cadence;
+    private Optional<String> doUntil;
 
-    public RecurringIndependent(String goal, String action, Optional<String> doOn, Optional<String> doAt, Optional<String> doUntil, Optional<String> cadence) {
-        super(goal, action);
-        this.goal = goal;
-        this.action = action;
-        this.doOn = doOn;
-        this.doAt = doAt;
-        this.doUntil = doUntil;
+    public RecurringIndependent(String goal, String action, Optional<String> doOn, Optional<String> doAt, Optional<String> cadence, Optional<String> doUntil) {
+        super(goal, action, doOn, doAt);
         this.cadence = cadence;
+        this.doUntil = doUntil;
     }
 }

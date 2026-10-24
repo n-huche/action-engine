@@ -1,11 +1,17 @@
 package com.nhuche.tasks.classes.abstracts;
 
-abstract public class Task {
-    private String goal;
-    private String action;
+import java.util.Optional;
 
-    public Task(String goal, String action) {
+abstract public class Task {
+    protected String goal;
+    protected String action;
+    protected Optional<String> doOn;
+    protected Optional<String> doAt;
+
+    public Task(String goal, String action, Optional<String> doOn, Optional<String> doAt) {
         this.goal = goal;
         this.action = action;
+        this.doOn = doOn;
+        this.doAt = doAt;
     }
 }
