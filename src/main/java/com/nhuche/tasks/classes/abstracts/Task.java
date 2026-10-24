@@ -14,4 +14,9 @@ abstract public class Task {
         this.doOn = doOn;
         this.doAt = doAt;
     }
+
+    @Override
+    public String toString() {
+        return goal;
+    }
 }

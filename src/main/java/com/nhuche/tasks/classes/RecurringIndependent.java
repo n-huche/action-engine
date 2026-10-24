@@ -16,4 +16,6 @@ public class RecurringIndependent extends Task implements Lifecycle, Cadence {
         this.cadence = cadence;
         this.doUntil = doUntil;
     }
+
+    
 }  
