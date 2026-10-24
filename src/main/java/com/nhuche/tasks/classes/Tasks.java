@@ -20,11 +20,11 @@ public class Tasks {
         tasks.add(new RecurringIndependent(goal, action, doOn, doAt, cadence, doUntil));
     }
 
-    public static void addUniqueProjectTask(String goal, String action, Optional<String> doOn, Optional<String> doAt) {
-        tasks.add(new UniqueProject(goal, action, doOn, doAt));
+    public static void addUniqueProjectTask(String goal, String action, Optional<String> doOn, Optional<String> doAt, String phase) {
+        tasks.add(new UniqueProject(goal, action, doOn, doAt, phase));
     }
 
-    public static void addRecurringProjectTask(String goal, String action, Optional<String> doOn, Optional<String> doAt, Optional<String> cadence, Optional<String> doUntil) {
-        tasks.add(new RecurringProject(goal, action, doOn, doAt, cadence, doUntil));
+    public static void addRecurringProjectTask(String goal, String action, Optional<String> doOn, Optional<String> doAt, Optional<String> cadence, Optional<String> doUntil, String phase) {
+        tasks.add(new RecurringProject(goal, action, doOn, doAt, cadence, doUntil, phase));
     }
 }

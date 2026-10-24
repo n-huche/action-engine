@@ -11,10 +11,12 @@ public class RecurringProject extends Task implements Lifecycle, Cadence, Projec
 
     private Optional<String> cadence;
     private Optional<String> doUntil;
+    private String phase;
 
-    public RecurringProject(String goal, String action, Optional<String> doOn, Optional<String> doAt, Optional<String> cadence, Optional<String> doUntil) {
+    public RecurringProject(String goal, String action, Optional<String> doOn, Optional<String> doAt, Optional<String> cadence, Optional<String> doUntil, String phase) {
         super(goal, action, doOn, doAt);
         this.cadence = cadence;
         this.doUntil = doUntil;
+        this.phase = phase;
     }
 }
