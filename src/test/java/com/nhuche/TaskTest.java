@@ -3,8 +3,7 @@ package com.nhuche;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.*;
-
-import com.nhuche.GoalNotDefinedException;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TaskTest {
 
@@ -28,19 +27,19 @@ public class TaskTest {
         task3.add();
     }
 
-
     @Test
-    void verifingTaskSimpleDefinition() {
-        Task task = new Task();
-        task.goal("Fazer isso");
-        assertEquals(task.getGoal(), "Fazer isso");
+    void taskWithGoalIsAddOnTheList() {
+        Task task4 = new Task();
+        task4.goal("Goal 4");
+        task4.add();
+        assertTrue(Task.getTaskList().contains(task4));
     }
 
     @Test 
     void taskWithoutGoalThrowsException() {
         assertThrows(GoalNotDefinedException.class, () -> {
             Task task4 = new Task();
-            task4.action("Ação 4");
+            task4.action("Action 4");
             task4.add();
         });
     }
