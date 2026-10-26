@@ -2,12 +2,12 @@
 
 ## Context
 
-Action Engine must have a interface for the user be able to create, modify and mark tasks as done.
+Action Engine must have an interface for the user be able to create, modify and mark tasks as done.
 
 ## Options
 
-1. Web app with html, css and javascript. Introduces frontend, most convencional.
-2. Markdown, obsidian as GUI. Simple to do, but complicate syncronization.
+1. Web app with html, css and javascript. Introduces frontend, most conventional.
+2. Markdown, obsidian as GUI. Simple to do, but complicate synchronization.
 3. All through AI. Requires AI, but is simple to do.
 
 ## Decision
@@ -17,5 +17,5 @@ Third option. Enables the use of AI to quickly create tasks, and is align with t
 ## Consequences
 
 - Markdown still required for AI context convenience.
-- AI signature or token credits required.
+- AI subscription or token credits required.
 - MCP friendly API required.

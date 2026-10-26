@@ -6,8 +6,8 @@ Created tasks must be stored, and just one storage form must be the source of tr
 
 ## Options
 
-1. SQL database. Convencional, easy data manipulation.
-2. Markdown. Convenient for AI, most difficult data manipulation.
+1. SQL database. Conventional, easy data manipulation.
+2. Markdown. Convenient for AI, more difficult data manipulation.
 
 ## Decision
 
@@ -15,5 +15,5 @@ Option 1. It is the most conventional way to store data, and preventing improper
 
 ## Consequences
 
-- Markdown files still need to be created as a reflex of database's truth.
-- Tasks real state can't be manipulate in an IDE.
+- Markdown files still need to be created as a reflection of database's truth.
+- Tasks real state can't be manipulated in an IDE.
