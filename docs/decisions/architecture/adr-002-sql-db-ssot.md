@@ -16,3 +16,4 @@ Option 1.
 ## Consequences
 
 - Markdown files still need to be created as a reflex of database's truth.
+- Tasks real state can't be manipulate in an IDE.
