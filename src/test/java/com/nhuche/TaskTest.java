@@ -41,4 +41,12 @@ public class TaskTest {
             task4.add();
         });
     }
+
+    @Test
+    void addInGetTaskList() {
+        assertThrows(UnsupportedOperationException.class, () -> {
+            Task task4 = new Task();
+            Task.getTaskList().add(task4);
+        });
+    }
 }

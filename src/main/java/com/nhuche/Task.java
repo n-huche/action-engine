@@ -3,6 +3,8 @@ package com.nhuche;
 import java.util.List;
 import java.util.ArrayList;
 
+import java.util.Collections;
+
 public class Task {
     private String type;
     private String goal;
@@ -102,6 +104,6 @@ public class Task {
     }
     
     public static List<Task> getTaskList() {
-        return taskList;
+        return Collections.unmodifiableList(taskList);
     }
 }
