@@ -2,7 +2,7 @@
 
 ## Context
 
-The way I intended to design classes and initialize tasks it proved, fortunately from the very beginning, to be unnecessarily complicated. I inteended to initialize tasks using constructors, but some definitions, especially related to the cadence type of recurring tasks, could change the quantity of arguments required for creating a task. Beyond that, defining all properties of a task in the constructor seemed to be too much of a burden.
+The way I intended to design classes and initialize tasks proved, fortunately from the very beginning, to be unnecessarily complicated. I intended to initialize tasks using constructors, but some definitions, especially related to the cadence type of recurring tasks, could change the quantity of arguments required for creating a task. Beyond that, defining all properties of a task in the constructor seemed to be too much of a burden.
 
 ## Options
 
