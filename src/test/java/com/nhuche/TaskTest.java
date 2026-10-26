@@ -43,7 +43,7 @@ public class TaskTest {
     }
 
     @Test
-    void addInGetTaskList() {
+    void addInGetTaskListThrowsException() {
         assertThrows(UnsupportedOperationException.class, () -> {
             Task task4 = new Task();
             Task.getTaskList().add(task4);
