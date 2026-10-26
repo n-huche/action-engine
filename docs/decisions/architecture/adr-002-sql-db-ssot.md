@@ -11,7 +11,7 @@ Created tasks must be stored, and just one storage form must be the source of tr
 
 ## Decision
 
-Option 1.
+Option 1. It is the most conventional way to store data, and preventing improper edits to Markdown files from breaking the system would introduce additional complexity. 
 
 ## Consequences
 
