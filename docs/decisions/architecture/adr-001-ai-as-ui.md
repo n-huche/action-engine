@@ -12,7 +12,7 @@ Action Engine must have a interface for the user be able to create, modify and m
 
 ## Decision
 
-Third option.
+Third option. Enables the use of AI to quickly create tasks, and is align with the API design I have in mind.
 
 ## Consequences
 
