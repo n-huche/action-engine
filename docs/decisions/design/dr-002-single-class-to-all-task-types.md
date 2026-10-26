@@ -12,7 +12,7 @@ The way I intended to design classes and initialize tasks proved, fortunately fr
 
 ## Decision
 
-I will use the third option, and also set all task types in only one class, reducing the complexity of the source code.
+I will use the third option, and also set all task types in only one class, reducing the complexity of the source code. This decision supersedes DR-001.
 
 ## Consequences
 
