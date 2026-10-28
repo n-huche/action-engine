@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Task {
-    private String type;
+    private TaskType type;
     private String goal;
     private String action;
     private String doOn;
@@ -28,7 +28,7 @@ public class Task {
     /// TASK CREATION ///
     /////////////////////
 
-    public void type(String type) {
+    public void type(TaskType type) {
         this.type = type;
     }
 
@@ -71,7 +71,7 @@ public class Task {
     /// GET METHODS ///
     ///////////////////
 
-    public String getType() {
+    public TaskType getType() {
         return type;
     }
 

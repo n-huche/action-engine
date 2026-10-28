@@ -49,4 +49,11 @@ public class TaskTest {
             Task.getTaskList().add(task4);
         });
     }
+
+    @Test 
+    void testingTaskTypeAsTypeMethodInput() {
+        Task task4 = new Task();
+        task4.type(TaskType.UNIQUE_INDEPENDENT);
+        assertEquals(task4.getType(), TaskType.UNIQUE_INDEPENDENT);
+    }
 }
