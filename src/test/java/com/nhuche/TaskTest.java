@@ -13,27 +13,27 @@ public class TaskTest {
     @BeforeEach
     void creationMultipleTasks() {
         task1 = new Task();
-        task1.type(TaskType.UNIQUE_PROJECT);
-        task1.goal("Goal 1");
-        task1.add();
+        task1.type(TaskType.UNIQUE_PROJECT)
+                .goal("Goal 1")
+                .add();
 
         task2 = new Task();
-        task2.type(TaskType.RECURRING_PROJECT);
-        task2.goal("Goal 2");
-        task2.add();
+        task2.type(TaskType.RECURRING_PROJECT)
+                .goal("Goal 2")
+                .add();
 
         task3 = new Task();
-        task3.type(TaskType.RECURRING_INDEPENDENT);
-        task3.goal("Goal 3");
-        task3.add();
+        task3.type(TaskType.RECURRING_INDEPENDENT)
+                .goal("Goal 3")
+                .add();
     }
 
     @Test
     void taskWithGoalIsAddOnTheList() {
         Task task4 = new Task();
-        task4.type(TaskType.RECURRING_INDEPENDENT);
-        task4.goal("Goal 4");
-        task4.add();
+        task4.type(TaskType.RECURRING_INDEPENDENT)
+                .goal("Goal 4")
+                .add();
         assertTrue(Task.getTaskList().contains(task4));
     }
 
@@ -41,8 +41,8 @@ public class TaskTest {
     void taskWithoutTypeThrowsException() {
         assertThrows(TaskTypeNotDefinedException.class, () -> {
             Task task4 = new Task();
-            task4.goal("Goal 4");
-            task4.add();
+            task4.goal("Goal 4")
+                    .add();
         });
     }
 
@@ -51,8 +51,8 @@ public class TaskTest {
     void taskWithoutGoalThrowsException() {
         assertThrows(GoalNotDefinedException.class, () -> {
             Task task4 = new Task();
-            task4.type(TaskType.UNIQUE_INDEPENDENT);
-            task4.add();
+            task4.type(TaskType.UNIQUE_INDEPENDENT)
+                    .add();
         });
     }
 

@@ -2,15 +2,16 @@ package com.nhuche;
 
 import java.util.List;
 import java.util.ArrayList;
-
 import java.util.Collections;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Task {
     private TaskType type;
     private String goal;
     private String action;
-    private String doOn;
-    private String doAt;
+    private LocalDate doOn;
+    private LocalTime doAt;
     private String doUntil;
     private String link;
     private String cadence;
@@ -28,36 +29,44 @@ public class Task {
     /// TASK CREATION ///
     /////////////////////
 
-    public void type(TaskType type) {
+    public Task type(TaskType type) {
         this.type = type;
+        return this;
     }
 
-    public void goal(String goal) {
+    public Task goal(String goal) {
         this.goal = goal;
+        return this;
     }
 
-    public void action(String action) {
+    public Task action(String action) {
         this.action = action;
+        return this;
     }
 
-    public void doOn(String doOn) {
+    public Task doOn(LocalDate doOn) {
         this.doOn = doOn;
+        return this;
     }
 
-    public void doAt(String doAt) {
+    public Task doAt(LocalTime doAt) {
         this.doAt = doAt;
+        return this;
     }
 
-    public void doUntil(String doUntil) {
+    public Task doUntil(String doUntil) {
         this.doUntil = doUntil;
+        return this;
     }
 
-    public void link(String link) {
+    public Task link(String link) {
         this.link = link;
+        return this;
     }
 
-    public void cadence(String cadence) {
+    public Task cadence(String cadence) {
         this.cadence = cadence;
+        return this;
     }
 
     public void add() {
@@ -86,11 +95,11 @@ public class Task {
         return action;
     }
 
-    public String getDoOn() {
+    public LocalDate getDoOn() {
         return doOn;
     }
 
-    public String getDoAt() {
+    public LocalTime getDoAt() {
         return doAt;
     }
 
