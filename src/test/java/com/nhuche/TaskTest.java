@@ -12,36 +12,36 @@ public class TaskTest {
 
     @BeforeEach
     void creationMultipleTasks() {
-        task1 = new Task();
-        task1.type(TaskType.UNIQUE_PROJECT)
-                .goal("Goal 1")
-                .add();
+        Task.create()
+            .type(TaskType.UNIQUE_PROJECT)
+            .goal("Goal 1")
+            .add();
 
-        task2 = new Task();
-        task2.type(TaskType.RECURRING_PROJECT)
-                .goal("Goal 2")
-                .add();
+        Task.create()
+            .type(TaskType.RECURRING_PROJECT)
+            .goal("Goal 2")
+            .add();
 
-        task3 = new Task();
-        task3.type(TaskType.RECURRING_INDEPENDENT)
-                .goal("Goal 3")
-                .add();
+        Task.create()
+        .type(TaskType.RECURRING_INDEPENDENT)
+            .goal("Goal 3")
+            .add();
     }
 
     @Test
     void taskWithGoalIsAddOnTheList() {
-        Task task4 = new Task();
-        task4.type(TaskType.RECURRING_INDEPENDENT)
-                .goal("Goal 4")
-                .add();
-        assertTrue(Task.getTaskList().contains(task4));
+        Task task = Task.create()
+                            .type(TaskType.RECURRING_INDEPENDENT)
+                            .goal("Goal 4")
+                            .add();
+        assertTrue(Task.getTaskList().contains(task));
     }
 
     @Test
     void taskWithoutTypeThrowsException() {
         assertThrows(TaskTypeNotDefinedException.class, () -> {
-            Task task4 = new Task();
-            task4.goal("Goal 4")
+            Task.create()
+                    .goal("Goal 4")
                     .add();
         });
     }
@@ -50,8 +50,8 @@ public class TaskTest {
     @Test 
     void taskWithoutGoalThrowsException() {
         assertThrows(GoalNotDefinedException.class, () -> {
-            Task task4 = new Task();
-            task4.type(TaskType.UNIQUE_INDEPENDENT)
+            Task.create()
+                    .type(TaskType.UNIQUE_INDEPENDENT)
                     .add();
         });
     }
@@ -59,15 +59,15 @@ public class TaskTest {
     @Test
     void addInGetTaskListThrowsException() {
         assertThrows(UnsupportedOperationException.class, () -> {
-            Task task4 = new Task();
+            Task task4 = Task.create();
             Task.getTaskList().add(task4);
         });
     }
 
     @Test 
     void testingTaskTypeAsTypeMethodInput() {
-        Task task4 = new Task();
-        task4.type(TaskType.UNIQUE_INDEPENDENT);
-        assertEquals(task4.getType(), TaskType.UNIQUE_INDEPENDENT);
+        Task task = Task.create()
+                        .type(TaskType.UNIQUE_INDEPENDENT);
+        assertEquals(task.getType(), TaskType.UNIQUE_INDEPENDENT);
     }
 }

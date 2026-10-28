@@ -16,7 +16,11 @@ public class Task {
     private String link;
     private String cadence;
 
-    public Task(){};
+    private Task(){};
+
+    public static Task create() {
+        return new Task();
+    }
 
     private static List<Task> taskList = new ArrayList<>();
 
@@ -69,7 +73,7 @@ public class Task {
         return this;
     }
 
-    public void add() {
+    public Task add() {
         if (type == null) {
             throw new TaskTypeNotDefinedException();
         }
@@ -77,6 +81,7 @@ public class Task {
             throw new GoalNotDefinedException();
         }
         taskList.add(this);
+        return this;
     }
 
     ///////////////////
