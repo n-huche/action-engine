@@ -61,6 +61,9 @@ public class Task {
     }
 
     public void add() {
+        if (type == null) {
+            throw new TaskTypeNotDefinedException();
+        }
         if (goal == null) {      
             throw new GoalNotDefinedException();
         }
