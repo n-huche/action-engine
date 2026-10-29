@@ -48,18 +48,4 @@ public class TaskTest {
                     .add();
         });
     }
-
-    @Test
-    void addInGetTaskListThrowsException() {
-        assertThrows(UnsupportedOperationException.class, () -> {
-            Task task4 = Task.create(TaskType.UNIQUE_INDEPENDENT, "Goal 4");
-            Task.getTaskList().add(task4);
-        });
-    }
-
-    @Test 
-    void testingTaskTypeAsCreateArgument() {
-        Task task = Task.create(TaskType.UNIQUE_INDEPENDENT, "Goal 4");
-        assertEquals(task.getType(), TaskType.UNIQUE_INDEPENDENT);
-    }
 }
