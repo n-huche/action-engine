@@ -2,7 +2,7 @@
 
 ## Context
 
-Tasks as mandatory attributes such as type and goal for all task types, link for project tasks and cadence for recurring tasks, I have to decide if all attributes will still be decided with individual methods or if all or some of them will be decide as factory arguments.
+Tasks as mandatory attributes such as type and goal for all task types, link for project tasks and cadence and doUntil for recurring tasks, I have to decide if all attributes will still be decided with individual methods or if all or some of them will be decide as factory arguments.
 
 ## Options
 
@@ -19,4 +19,4 @@ Option 2. Best balance between a fail-fast code and code complexity.
 
 - Still is require verify if factory args are null or empty.
 - Non-definition of type and goal causes Compilation Error instead of Runtime Exception.
-- Non-definition of cadence or link in recurring and project tasks types still causes Runtime Exception.
+- Non-definition of cadence, doUntil or link in recurring and project tasks types still causes Runtime Exception.
