@@ -10,9 +10,9 @@ public class Task {
     private TaskType type;
     private String goal;
     private String action;
-    private LocalDate doOn;
     private LocalTime doAt;
-    private String doUntil;
+    private LocalDate doOn;
+    private LocalDate doUntil;
     private String link;
     private String cadence;
 
@@ -51,7 +51,7 @@ public class Task {
         return this;
     }
 
-    public Task doUntil(String doUntil) {
+    public Task doUntil(LocalDate doUntil) {
         this.doUntil = doUntil;
         return this;
     }
@@ -101,7 +101,7 @@ public class Task {
         return doAt;
     }
 
-    public String getDoUntil() {
+    public LocalDate getDoUntil() {
         return doUntil;
     }
 
