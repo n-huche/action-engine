@@ -16,10 +16,13 @@ public class Task {
     private String link;
     private String cadence;
 
-    private Task(){};
+    private Task(TaskType type, String goal){
+        this.type = type;
+        this.goal = goal;
+    };
 
-    public static Task create() {
-        return new Task();
+    public static Task create(TaskType type, String goal) {
+        return new Task(type, goal);
     }
 
     private static List<Task> taskList = new ArrayList<>();
@@ -32,16 +35,6 @@ public class Task {
     /////////////////////
     /// TASK CREATION ///
     /////////////////////
-
-    public Task type(TaskType type) {
-        this.type = type;
-        return this;
-    }
-
-    public Task goal(String goal) {
-        this.goal = goal;
-        return this;
-    }
 
     public Task action(String action) {
         this.action = action;
@@ -77,7 +70,7 @@ public class Task {
         if (type == null) {
             throw new TaskTypeNotDefinedException();
         }
-        if (goal == null) {      
+        if (goal == null || goal.isBlank()) {      
             throw new GoalNotDefinedException();
         }
         taskList.add(this);
