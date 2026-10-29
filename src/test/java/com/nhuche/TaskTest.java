@@ -22,6 +22,10 @@ public class TaskTest {
             .add();
     }
 
+    //////////////////////////////////////
+    /// ADD METHOD VERIFIER VALIDATION ///
+    //////////////////////////////////////
+
     @Test
     void taskWithGoalIsAddOnTheList() {
         Task task = Task.create(TaskType.RECURRING_INDEPENDENT, "Goal 4")
@@ -36,7 +40,6 @@ public class TaskTest {
                     .add();
         });
     }
-
 
     @Test 
     void taskWithoutGoalThrowsException() {
