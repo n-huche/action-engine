@@ -29,7 +29,7 @@ public class TaskTest {
     @Test
     void taskWithGoalIsAddOnTheList() {
         Task task = Task.create(TaskType.RECURRING_INDEPENDENT, "Goal 4")
-                            .add();
+                        .add();
         assertTrue(Task.getTaskList().contains(task));
     }
 
@@ -37,7 +37,7 @@ public class TaskTest {
     void taskWithoutTypeThrowsException() {
         assertThrows(TaskTypeNotDefinedException.class, () -> {
             Task.create(null, "Goal 4")
-                    .add();
+                .add();
         });
     }
 
@@ -45,7 +45,7 @@ public class TaskTest {
     void taskWithoutGoalThrowsException() {
         assertThrows(GoalNotDefinedException.class, () -> {
             Task.create(TaskType.UNIQUE_INDEPENDENT, "")
-                    .add();
+                .add();
         });
     }
 }
