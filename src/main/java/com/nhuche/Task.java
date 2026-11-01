@@ -3,8 +3,7 @@ package com.nhuche;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.*;
 
 public class Task {
     private TaskType type;
@@ -13,9 +12,9 @@ public class Task {
     private LocalTime doAt;
     private LocalDate doOn;
     private LocalDate doUntil;
+    private Cadence cadence;
     private String link;
-    private String cadence;
-
+    
     private Task(TaskType type, String goal){
         this.type = type;
         this.goal = goal;
@@ -56,13 +55,27 @@ public class Task {
         return this;
     }
 
-    public Task link(String link) {
-        this.link = link;
+    public Task cadence(Cadence cadence) {
+        this.cadence = cadence;
+
+        switch (cadence) {
+            case Cadence.Daily daily -> { }
+            case Cadence.Weekdays weekdays -> {
+                DayOfWeek[] days = weekdays.days();
+            }
+            case Cadence.Monthdays monthdays -> {
+                int[] days = monthdays.days();
+            }
+            case Cadence.Monthweeks monthweeks -> {
+                DayOfWeek day = monthweeks.day();
+            }
+        }
+
         return this;
     }
 
-    public Task cadence(String cadence) {
-        this.cadence = cadence;
+    public Task link(String link) {
+        this.link = link;
         return this;
     }
 
@@ -109,7 +122,7 @@ public class Task {
         return link;
     }
 
-    public String getCadence() {
+    public Cadence getCadence() {
         return cadence;
     }
     
