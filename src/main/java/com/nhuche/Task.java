@@ -14,14 +14,18 @@ public class Task {
     private LocalDate doUntil;
     private Cadence cadence;
     private String link;
-    
+
     private Task(TaskType type, String goal){
         this.type = type;
         this.goal = goal;
     };
 
+    static private List<Task> newTasks = new ArrayList<>();
+
     public static Task create(TaskType type, String goal) {
-        return new Task(type, goal);
+        Task task = new Task(type, goal);
+        newTasks.add(task);
+        return task;
     }
 
     private static List<Task> taskList = new ArrayList<>();
@@ -59,7 +63,16 @@ public class Task {
         this.cadence = cadence;
 
         switch (cadence) {
-            case Cadence.Daily daily -> { }
+            case Cadence.Daily daily -> {
+                if(newTasks.size() >= 2 && doUntil != LocalDate.now()) {
+                    Task task = new Task(type, goal)
+                                    .action(action)
+                                    .doAt(doAt)
+                                    .doOn(doOn.plusDays(1))
+                                    .doUntil(doUntil);
+                    newTasks.add(task);
+                }
+            }
             case Cadence.Weekdays weekdays -> {
                 DayOfWeek[] days = weekdays.days();
             }
@@ -86,7 +99,15 @@ public class Task {
         if (goal == null || goal.isBlank()) {      
             throw new GoalNotDefinedException();
         }
-        taskList.add(this);
+
+        if (type == TaskType.UNIQUE_INDEPENDENT || type == TaskType.UNIQUE_PROJECT) {    
+            taskList.add(this);
+        } else {
+            for (Task task : newTasks) {
+                taskList.add(task);
+                newTasks.remove(task);
+            }
+        }
         return this;
     }
 
