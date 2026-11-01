@@ -19,14 +19,12 @@ public class Task {
         this.type = type;
         this.goal = goal;
     };
-    
 
     public static Task create(TaskType type, String goal) {
         Task task = new Task(type, goal);
         return task;
     }
 
-    private static List<Task> newCadenceTasks = new ArrayList<>();
     private static List<Task> taskList = new ArrayList<>();
 
     @Override
@@ -53,6 +51,11 @@ public class Task {
         return this;
     }
 
+    public Task link(String link) {
+        this.link = link;
+        return this;
+    }
+
     public Task doUntil(LocalDate doUntil) {
         this.doUntil = doUntil;
         return this;
@@ -62,16 +65,7 @@ public class Task {
         this.cadence = cadence;
 
         switch (cadence) {
-            case Cadence.Daily daily -> {
-                if(newCadenceTasks.size() >= 2 && LocalDate.now() != doUntil) {
-                    Task task = new Task(type, goal)
-                                    .action(action)
-                                    .doAt(doAt)
-                                    .doOn(doOn.plusDays(1))
-                                    .doUntil(doUntil);
-                    newCadenceTasks.add(task);
-                }
-            }
+            case Cadence.Daily daily -> { }
             case Cadence.Weekdays weekdays -> {
                 DayOfWeek[] days = weekdays.days();
             }
@@ -86,11 +80,6 @@ public class Task {
         return this;
     }
 
-    public Task link(String link) {
-        this.link = link;
-        return this;
-    }
-
     public Task add() {
         if (type == null) {
             throw new TaskTypeNotDefinedException();
@@ -98,15 +87,8 @@ public class Task {
         if (goal == null || goal.isBlank()) {      
             throw new GoalNotDefinedException();
         }
-
-        if (type == TaskType.UNIQUE_INDEPENDENT || type == TaskType.UNIQUE_PROJECT) {    
-            taskList.add(this);
-        } else {
-            for (Task task : newCadenceTasks) {
-                taskList.add(task);
-                newCadenceTasks.remove(task);
-            }
-        }
+  
+        taskList.add(this);
         return this;
     }
 
@@ -134,20 +116,16 @@ public class Task {
         return doAt;
     }
 
-    public LocalDate getDoUntil() {
-        return doUntil;
-    }
-
     public String getLink() {
         return link;
     }
 
-    public Cadence getCadence() {
-        return cadence;
+    public LocalDate getDoUntil() {
+        return doUntil;
     }
 
-    public static List<Task> getNewTasks() {
-        return Collections.unmodifiableList(newCadenceTasks);
+    public Cadence getCadence() {
+        return cadence;
     }
     
     public static List<Task> getTaskList() {
