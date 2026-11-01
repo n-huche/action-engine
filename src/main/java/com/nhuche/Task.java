@@ -96,6 +96,9 @@ public class Task {
         if ((type == TaskType.UNIQUE_PROJECT || type == TaskType.RECURRING_PROJECT) && link == null) {
             throw new LinkNotDefinedException();
         }
+        if ((type == TaskType.RECURRING_INDEPENDENT || type == TaskType.RECURRING_PROJECT) && doUntil == null) {
+            throw new DoUntilNotDefinedException();
+        }
         if ((type == TaskType.RECURRING_INDEPENDENT || type == TaskType.RECURRING_PROJECT || type == TaskType.MAINTENANCE) && cadence == null) {
             throw new CadenceNotDefinedException();
         }
