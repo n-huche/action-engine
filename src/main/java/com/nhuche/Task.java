@@ -93,6 +93,9 @@ public class Task {
         if (goal == null || goal.isBlank()) {      
             throw new GoalNotDefinedException();
         }
+        if ((type == TaskType.UNIQUE_PROJECT || type == TaskType.RECURRING_PROJECT) && link == null) {
+            throw new LinkNotDefinedException();
+        }
   
         taskList.add(this);
         return this;
