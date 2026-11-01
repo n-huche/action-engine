@@ -19,15 +19,14 @@ public class Task {
         this.type = type;
         this.goal = goal;
     };
-
-    static private List<Task> newTasks = new ArrayList<>();
+    
 
     public static Task create(TaskType type, String goal) {
         Task task = new Task(type, goal);
-        newTasks.add(task);
         return task;
     }
 
+    private static List<Task> newCadenceTasks = new ArrayList<>();
     private static List<Task> taskList = new ArrayList<>();
 
     @Override
@@ -64,13 +63,13 @@ public class Task {
 
         switch (cadence) {
             case Cadence.Daily daily -> {
-                if(newTasks.size() >= 2 && doUntil != LocalDate.now()) {
+                if(newCadenceTasks.size() >= 2 && LocalDate.now() != doUntil) {
                     Task task = new Task(type, goal)
                                     .action(action)
                                     .doAt(doAt)
                                     .doOn(doOn.plusDays(1))
                                     .doUntil(doUntil);
-                    newTasks.add(task);
+                    newCadenceTasks.add(task);
                 }
             }
             case Cadence.Weekdays weekdays -> {
@@ -103,9 +102,9 @@ public class Task {
         if (type == TaskType.UNIQUE_INDEPENDENT || type == TaskType.UNIQUE_PROJECT) {    
             taskList.add(this);
         } else {
-            for (Task task : newTasks) {
+            for (Task task : newCadenceTasks) {
                 taskList.add(task);
-                newTasks.remove(task);
+                newCadenceTasks.remove(task);
             }
         }
         return this;
@@ -145,6 +144,10 @@ public class Task {
 
     public Cadence getCadence() {
         return cadence;
+    }
+
+    public static List<Task> getNewTasks() {
+        return Collections.unmodifiableList(newCadenceTasks);
     }
     
     public static List<Task> getTaskList() {
