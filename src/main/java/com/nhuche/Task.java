@@ -52,6 +52,9 @@ public class Task {
     }
 
     public Task link(String link) {
+        if(!(type == TaskType.UNIQUE_PROJECT || type == TaskType.RECURRING_PROJECT)) {
+            throw new NoProjectTaskFoundException();
+        }
         this.link = link;
         return this;
     }
