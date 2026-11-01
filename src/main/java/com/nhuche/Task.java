@@ -60,6 +60,9 @@ public class Task {
     }
 
     public Task doUntil(LocalDate doUntil) {
+        if(!(type == TaskType.RECURRING_INDEPENDENT || type == TaskType.RECURRING_PROJECT)) {
+            throw new NoRecurringTaskFoundException();
+        }
         this.doUntil = doUntil;
         return this;
     }
