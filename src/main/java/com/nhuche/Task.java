@@ -68,8 +68,10 @@ public class Task {
     }
 
     public Task cadence(Cadence cadence) {
+        if(!(type == TaskType.RECURRING_INDEPENDENT || type == TaskType.RECURRING_PROJECT || type == TaskType.MAINTENANCE)) {
+            throw new NoCadenceTaskFoundException();
+        }
         this.cadence = cadence;
-
         switch (cadence) {
             case Cadence.Daily daily -> { }
             case Cadence.Weekdays weekdays -> {
@@ -82,7 +84,6 @@ public class Task {
                 DayOfWeek day = monthweeks.day();
             }
         }
-
         return this;
     }
 
