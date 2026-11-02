@@ -21,6 +21,53 @@ public class Task {
         this.goal = goal;
     };
 
+    public void newTask(TaskInterface task) {
+        switch (task) {
+            case TaskInterface.UniqueIndependent t -> {
+                this.type = TaskType.UNIQUE_INDEPENDENT;
+                this.goal = t.goal();
+                this.action = t.action();
+                this.doAt = t.doAt();
+                this.doOn = t.doOn();
+            }
+            case TaskInterface.UniqueProject t -> {
+                this.type = TaskType.UNIQUE_PROJECT;
+                this.goal = t.goal();
+                this.action = t.action();
+                this.link = t.link();
+                this.doAt = t.doAt();
+                this.doOn = t.doOn();
+            }
+            case TaskInterface.RecurringIndependent t -> {
+                this.type = TaskType.RECURRING_INDEPENDENT;
+                this.goal = t.goal();
+                this.action = t.action();
+                this.doAt = t.doAt();
+                this.doOn = t.doOn();
+                this.doUntil = t.doUntil();
+                this.cadence = t.cadence();
+            }
+            case TaskInterface.RecurringProject t -> {
+                this.type = TaskType.RECURRING_PROJECT;
+                this.goal = t.goal();
+                this.action = t.action();
+                this.link = t.link();
+                this.doAt = t.doAt();
+                this.doOn = t.doOn();
+                this.doUntil = t.doUntil();
+                this.cadence = t.cadence();
+            }
+            case TaskInterface.Manteinance t -> {
+                this.type = TaskType.MAINTENANCE;
+                this.goal = t.goal();
+                this.action = t.action();
+                this.doAt = t.doAt();
+                this.doOn = t.doOn();
+                this.cadence = t.cadence();
+            }
+        }
+    }
+
     public static Task create(TaskType type, String goal) {
         Task task = new Task(type, goal);
         return task;
