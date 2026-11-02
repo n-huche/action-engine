@@ -1,5 +1,4 @@
 package com.nhuche;
-import com.nhuche.exception.*;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -7,7 +6,6 @@ import java.util.Collections;
 import java.time.*;
 
 public class Task {
-    private TaskType type;
     private String goal;
     private String action;
     private LocalTime doAt;
@@ -16,61 +14,71 @@ public class Task {
     private Cadence cadence;
     private String link;
 
-    private Task(TaskType type, String goal){
-        this.type = type;
+    // Unique Indepent Task
+    private Task(String goal, String action, LocalTime doAt, LocalDate doOn){
         this.goal = goal;
+        this.action = action;
+        this.doAt = doAt;
+        this.doOn = doOn;
     };
 
-    public void newTask(TaskInterface task) {
-        switch (task) {
-            case TaskInterface.UniqueIndependent t -> {
-                this.type = TaskType.UNIQUE_INDEPENDENT;
-                this.goal = t.goal();
-                this.action = t.action();
-                this.doAt = t.doAt();
-                this.doOn = t.doOn();
+    // Unique Project Task
+    private Task(String goal, String action, String link, LocalTime doAt, LocalDate doOn){
+        this.goal = goal;
+        this.action = action;
+        this.link = link;
+        this.doAt = doAt;
+        this.doOn = doOn;
+    };
+
+    // Recurring Independent Task
+    private Task(String goal, String action, LocalTime doAt, LocalDate doOn, LocalDate doUntil, Cadence cadence){
+        this.goal = goal;
+        this.action = action;
+        this.doAt = doAt;
+        this.doOn = doOn;
+        this.doUntil = doUntil;
+        this.cadence = cadence;
+    };
+
+    // Recurring Project Task
+    private Task(String goal, String action, String link, LocalTime doAt, LocalDate doOn, LocalDate doUntil, Cadence cadence){
+        this.goal = goal;
+        this.action = action;
+        this.link = link;
+        this.doAt = doAt;
+        this.doOn = doOn;
+        this.doUntil = doUntil;
+        this.cadence = cadence;
+    };
+
+    // Manteinance
+    private Task(String goal, String action, LocalTime doAt, LocalDate doOn, Cadence cadence){
+        this.goal = goal;
+        this.action = action;
+        this.doAt = doAt;
+        this.doOn = doOn;
+        this.cadence = cadence;
+    };
+
+    public static Task create(TaskInterface newTask) {
+        switch (newTask) {
+            case TaskInterface.UniqueIndependent task -> {
+                return new Task(task.goal(), task.action(), task.doAt(), task.doOn());
             }
-            case TaskInterface.UniqueProject t -> {
-                this.type = TaskType.UNIQUE_PROJECT;
-                this.goal = t.goal();
-                this.action = t.action();
-                this.link = t.link();
-                this.doAt = t.doAt();
-                this.doOn = t.doOn();
+            case TaskInterface.UniqueProject task -> {
+                return new Task(task.goal(), task.action(), task.link(), task.doAt(), task.doOn());
             }
-            case TaskInterface.RecurringIndependent t -> {
-                this.type = TaskType.RECURRING_INDEPENDENT;
-                this.goal = t.goal();
-                this.action = t.action();
-                this.doAt = t.doAt();
-                this.doOn = t.doOn();
-                this.doUntil = t.doUntil();
-                this.cadence = t.cadence();
+            case TaskInterface.RecurringIndependent task -> {
+                return new Task(task.goal(), task.action(), task.doAt(), task.doOn(), task.doUntil(), task.cadence());
             }
-            case TaskInterface.RecurringProject t -> {
-                this.type = TaskType.RECURRING_PROJECT;
-                this.goal = t.goal();
-                this.action = t.action();
-                this.link = t.link();
-                this.doAt = t.doAt();
-                this.doOn = t.doOn();
-                this.doUntil = t.doUntil();
-                this.cadence = t.cadence();
+            case TaskInterface.RecurringProject task -> {
+                return new Task(task.goal(), task.action(), task.link(), task.doAt(), task.doOn(), task.doUntil(), task.cadence());
             }
-            case TaskInterface.Manteinance t -> {
-                this.type = TaskType.MAINTENANCE;
-                this.goal = t.goal();
-                this.action = t.action();
-                this.doAt = t.doAt();
-                this.doOn = t.doOn();
-                this.cadence = t.cadence();
+            case TaskInterface.Manteinance task -> {
+                return new Task(task.goal(), task.action(), task.doAt(), task.doOn(), task.cadence());
             }
         }
-    }
-
-    public static Task create(TaskType type, String goal) {
-        Task task = new Task(type, goal);
-        return task;
     }
 
     private static List<Task> taskList = new ArrayList<>();
@@ -80,83 +88,9 @@ public class Task {
         return goal;
     }
 
-    /////////////////////
-    /// TASK CREATION ///
-    /////////////////////
-
-    public Task action(String action) {
-        this.action = action;
-        return this;
-    }
-
-    public Task doOn(LocalDate doOn) {
-        this.doOn = doOn;
-        return this;
-    }
-
-    public Task doAt(LocalTime doAt) {
-        this.doAt = doAt;
-        return this;
-    }
-
-    public Task link(String link) {
-        if(!(type == TaskType.UNIQUE_PROJECT || type == TaskType.RECURRING_PROJECT)) {
-            throw new NoProjectTaskFoundException();
-        }
-        this.link = link;
-        return this;
-    }
-
-    public Task doUntil(LocalDate doUntil) {
-        if(!(type == TaskType.RECURRING_INDEPENDENT || type == TaskType.RECURRING_PROJECT)) {
-            throw new NoRecurringTaskFoundException();
-        }
-        this.doUntil = doUntil;
-        return this;
-    }
-
-    public Task cadence(Cadence cadence) {
-        if(!(type == TaskType.RECURRING_INDEPENDENT || type == TaskType.RECURRING_PROJECT || type == TaskType.MAINTENANCE)) {
-            throw new NoCadenceTaskFoundException();
-        }
-        this.cadence = cadence;
-        switch (cadence) {
-            case Cadence.Daily daily -> { }
-            case Cadence.Weekdays weekdays -> { }
-            case Cadence.Monthdays monthdays -> { }
-            case Cadence.Monthweeks monthweeks -> { }
-        }
-        return this;
-    }
-
-    public Task add() {
-        if (type == null) {
-            throw new TaskTypeNotDefinedException();
-        }
-        if (goal == null || goal.isBlank()) {      
-            throw new GoalNotDefinedException();
-        }
-        if ((type == TaskType.UNIQUE_PROJECT || type == TaskType.RECURRING_PROJECT) && link == null) {
-            throw new LinkNotDefinedException();
-        }
-        if ((type == TaskType.RECURRING_INDEPENDENT || type == TaskType.RECURRING_PROJECT) && doUntil == null) {
-            throw new DoUntilNotDefinedException();
-        }
-        if ((type == TaskType.RECURRING_INDEPENDENT || type == TaskType.RECURRING_PROJECT || type == TaskType.MAINTENANCE) && cadence == null) {
-            throw new CadenceNotDefinedException();
-        }
-  
-        taskList.add(this);
-        return this;
-    }
-
     ///////////////////
     /// GET METHODS ///
     ///////////////////
-
-    public TaskType getType() {
-        return type;
-    }
 
     public String getGoal() {
         return goal;

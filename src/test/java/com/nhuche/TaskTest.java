@@ -4,15 +4,13 @@ import com.nhuche.exception.*;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.time.DayOfWeek;
-import java.time.LocalDate;
+import java.time.*;
 
 public class TaskTest {
 
     Task task1;
     Task task2;
     Task task3;
-
 
     @BeforeEach
     void creationMultipleTasks() {
@@ -149,5 +147,19 @@ public class TaskTest {
             Task.create(TaskType.UNIQUE_INDEPENDENT, "")
                 .add();
         });
+    }
+
+    //////////////////////
+    /// NEWTASK METHOD ///
+    //////////////////////
+    
+    @Test
+    void TestingIfNewTaskMethodWorks() {
+        Task task = Task.newTask(TaskInterface.recurringIndependent("Goal 4", 
+                                                        "Action", 
+                                                        LocalTime.of(11, 10), 
+                                                        LocalDate.of(2026, 12, 7), 
+                                                        LocalDate.of(2027, 1, 28), 
+                                                        Cadence.daily()));
     }
 }
