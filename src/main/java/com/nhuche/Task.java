@@ -74,15 +74,9 @@ public class Task {
         this.cadence = cadence;
         switch (cadence) {
             case Cadence.Daily daily -> { }
-            case Cadence.Weekdays weekdays -> {
-                DayOfWeek[] days = weekdays.days();
-            }
-            case Cadence.Monthdays monthdays -> {
-                int[] days = monthdays.days();
-            }
-            case Cadence.Monthweeks monthweeks -> {
-                DayOfWeek day = monthweeks.day();
-            }
+            case Cadence.Weekdays weekdays -> { }
+            case Cadence.Monthdays monthdays -> { }
+            case Cadence.Monthweeks monthweeks -> { }
         }
         return this;
     }
