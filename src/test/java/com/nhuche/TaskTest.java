@@ -3,6 +3,8 @@ package com.nhuche;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.LocalDate;
+
 public class TaskTest {
 
     Task task1;
@@ -13,14 +15,49 @@ public class TaskTest {
     @BeforeEach
     void creationMultipleTasks() {
         Task.create(TaskType.UNIQUE_PROJECT, "Goal 1")
+            .link("Project 1")
             .add();
 
         Task.create(TaskType.RECURRING_PROJECT, "Goal 2")
+            .link("Project 2")
+            .doUntil(LocalDate.of(2026, 11, 19))
+            .cadence(Cadence.daily())
             .add();
 
         Task.create(TaskType.RECURRING_INDEPENDENT, "Goal 3")
+            .doUntil(LocalDate.of(2026, 11, 24))
+            .cadence(Cadence.monthdays(15))
             .add();
     }
+
+    /////////////////////////////////////
+    /// LINK TASK VERIFIER VALIDATION ///
+    /////////////////////////////////////
+    
+    @Test
+    void defineProjectTaskLink() {
+        Task task = Task.create(TaskType.UNIQUE_PROJECT, "Goal 4")
+                        .link("Project 4")
+                        .add();
+        assertTrue(Task.getTaskList().contains(task)); 
+    }
+
+    @Test
+    void projectTaskWithoutLinkThrowsException(){
+        assertThrows(LinkNotDefinedException.class, () -> {
+            Task.create(TaskType.UNIQUE_PROJECT, "Goal 4")
+                .add();
+        });
+    } 
+
+    @Test
+    void nonProjectTaskWithLinkThrowsException(){
+        assertThrows(NoProjectTaskFoundException.class, () -> {
+            Task.create(TaskType.UNIQUE_INDEPENDENT, "Goal 4")
+                .link("Project 4")
+                .add();
+        });
+    } 
 
     //////////////////////////////////////
     /// ADD METHOD VERIFIER VALIDATION ///
