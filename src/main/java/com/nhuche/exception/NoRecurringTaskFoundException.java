@@ -1,7 +1,7 @@
-package com.nhuche;
+package com.nhuche.exception;
 
 public class NoRecurringTaskFoundException extends RuntimeException {
-   public NoRecurringTaskFoundException() {
+    public NoRecurringTaskFoundException() {
         super();
-   }
+    }
 }

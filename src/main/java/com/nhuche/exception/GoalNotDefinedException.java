@@ -1,6 +1,4 @@
-package com.nhuche;
-
-import java.lang.RuntimeException;
+package com.nhuche.exception;
 
 public class GoalNotDefinedException extends RuntimeException {
     public GoalNotDefinedException() {

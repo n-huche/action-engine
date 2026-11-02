@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
+import com.nhuche.exception.*;
+
 public class TaskTest {
 
     Task task1;
