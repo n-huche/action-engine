@@ -3,6 +3,7 @@ package com.nhuche;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 public class TaskTest {
@@ -55,6 +56,38 @@ public class TaskTest {
         assertThrows(NoProjectTaskFoundException.class, () -> {
             Task.create(TaskType.UNIQUE_INDEPENDENT, "Goal 4")
                 .link("Project 4")
+                .add();
+        });
+    } 
+
+    ////////////////////////////////////////
+    /// DOUNTIL TASK VERIFIER VALIDATION ///
+    ////////////////////////////////////////
+    
+    @Test
+    void defineRecurrentTaskLink() {
+        Task task = Task.create(TaskType.RECURRING_PROJECT, "Goal 4")
+                        .link("Project 4")
+                        .doUntil(LocalDate.of(2026, 11, 20))
+                        .cadence(Cadence.monthweeks(DayOfWeek.MONDAY, 1, 2))
+                        .add();
+        assertTrue(Task.getTaskList().contains(task)); 
+    }
+
+    @Test
+    void recurringTaskWithoutLinkThrowsException(){
+        assertThrows(DoUntilNotDefinedException.class, () -> {
+            Task.create(TaskType.RECURRING_INDEPENDENT, "Goal 4")
+                .cadence(Cadence.monthdays(4, 9))
+                .add();
+        });
+    } 
+
+    @Test
+    void nonRecurringTaskWithLinkThrowsException(){
+        assertThrows(NoRecurringTaskFoundException.class, () -> {
+            Task.create(TaskType.UNIQUE_INDEPENDENT, "Goal 4")
+                .doUntil(LocalDate.of(2026, 11, 23))
                 .add();
         });
     } 
