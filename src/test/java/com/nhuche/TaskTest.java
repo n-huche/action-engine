@@ -65,7 +65,7 @@ public class TaskTest {
     ////////////////////////////////////////
     
     @Test
-    void defineRecurrentTaskLink() {
+    void defineRecurrentTaskDoUntil() {
         Task task = Task.create(TaskType.RECURRING_PROJECT, "Goal 4")
                         .link("Project 4")
                         .doUntil(LocalDate.of(2026, 11, 20))
@@ -75,7 +75,7 @@ public class TaskTest {
     }
 
     @Test
-    void recurringTaskWithoutLinkThrowsException(){
+    void recurringTaskWithoutDoUntilThrowsException(){
         assertThrows(DoUntilNotDefinedException.class, () -> {
             Task.create(TaskType.RECURRING_INDEPENDENT, "Goal 4")
                 .cadence(Cadence.monthdays(4, 9))
@@ -84,7 +84,7 @@ public class TaskTest {
     } 
 
     @Test
-    void nonRecurringTaskWithLinkThrowsException(){
+    void nonRecurringTaskWithDoUntilThrowsException(){
         assertThrows(NoRecurringTaskFoundException.class, () -> {
             Task.create(TaskType.UNIQUE_INDEPENDENT, "Goal 4")
                 .doUntil(LocalDate.of(2026, 11, 23))
