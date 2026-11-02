@@ -92,6 +92,37 @@ public class TaskTest {
         });
     } 
 
+    ////////////////////////////////////////
+    /// CADENCE TASK VERIFIER VALIDATION ///
+    ////////////////////////////////////////
+    
+    @Test
+    void defineCadenceTaskCadence() {
+        Task task = Task.create(TaskType.MAINTENANCE, "Goal 4")
+                        .link("Project 4")
+                        .cadence(Cadence.monthweeks(DayOfWeek.MONDAY, 1, 2))
+                        .add();
+        assertTrue(Task.getTaskList().contains(task)); 
+    }
+
+    @Test
+    void cadenceTaskWithoutCadenceThrowsException(){
+        assertThrows(CadenceNotDefinedException.class, () -> {
+            Task.create(TaskType.RECURRING_INDEPENDENT, "Goal 4")
+                .doUntil(LocalDate.of(2026, 12, 10))
+                .add();
+        });
+    } 
+
+    @Test
+    void nonCadenceTaskWithCadenceThrowsException(){
+        assertThrows(NoCadenceTaskFoundException.class, () -> {
+            Task.create(TaskType.UNIQUE_INDEPENDENT, "Goal 4")
+                .cadence(Cadence.daily())
+                .add();
+        });
+    } 
+
     //////////////////////////////////////
     /// ADD METHOD VERIFIER VALIDATION ///
     //////////////////////////////////////
