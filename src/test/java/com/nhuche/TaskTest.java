@@ -1,12 +1,11 @@
 package com.nhuche;
+import com.nhuche.exception.*;
 
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-
-import com.nhuche.exception.*;
 
 public class TaskTest {
 
