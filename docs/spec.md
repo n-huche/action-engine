@@ -52,7 +52,7 @@ Cadence is a task field whitch states that the task have repeated occurrences be
 
 Recurring task types and manteinances are the ones with cadence field. 
 
-## Project
+## Projects
 
 Projects exists for turn a complex goal into a reachable thing, goals that a independent task is not suficient to reach alone. 
 
@@ -74,3 +74,26 @@ Here comes deadline tasks, stages and projects which did reach their deadline an
 
 Here comes deadline tasks, stages and projects which didn't reach their deadline and doesn't was completed yet.
 
+### Ongoing
+
+Here comes cadence tasks, recurring tasks stay here between the date of first occurrence and the date of last one, maintenance tasks stay here forever or until be paused or canceled.
+
+### Paused
+
+Here comes tasks, stages and projects which are not feasible to continue in the moment. When paused, they lost their window and deadline.
+
+### Canceled
+
+Here comes tasks, stages and projects that was not anymore necessary or permanently unfeasible.
+
+## History
+
+A table is created to record what was done during each window (hour) throughout the day, this table is called history. There is also a table for each month. 
+
+Project tasks enters in history tables with the name of the project.
+
+## Schecule
+
+A table is created to record what needs to be done in each day and window (hour) until the most time distant task, this table ia called history. There is also a table for each month. 
+
+Project tasks enters in schedule tables with the name of the project.
